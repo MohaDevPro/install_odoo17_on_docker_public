@@ -2,6 +2,7 @@
 DESTINATION=$1
 PORT=$2
 CHAT=$3
+PGADMIN=$4
 # clone Odoo directory
 git clone --depth=1 https://github.com/MohaDevPro/install_odoo17_on_docker_public.git $DESTINATION
 rm -rf $DESTINATION/.git
@@ -15,6 +16,7 @@ if grep -qF "fs.inotify.max_user_watches" /etc/sysctl.conf; then echo $(grep -F 
 sudo sysctl -p
 sed -i 's/10015/'$PORT'/g' $DESTINATION/docker-compose.yml
 sed -i 's/20015/'$CHAT'/g' $DESTINATION/docker-compose.yml
+sed -i 's/5053/'$PGADMIN'/g' $DESTINATION/docker-compose.yml
 # run Odoo
 docker compose -f $DESTINATION/docker-compose.yml up -d
 
