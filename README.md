@@ -23,8 +23,8 @@ to set up another Odoo instance @ `localhost:11017` (default master password: `a
 
 Some arguments:
 * First argument (**odoo-one**): Odoo deploy folder
-* Second argument (**10016**): Odoo port
-* Third argument (**20016**): live chat port
+* Second argument (**10017**): Odoo port
+* Third argument (**20017**): live chat port
 
 If `curl` is not found, install it:
 
@@ -41,11 +41,11 @@ Start the container:
 docker compose up
 ```
 
-* Then open `localhost:10016` to access Odoo 17.0. If you want to start the server with a different port, change **10016** to another value in **docker-compose.yml**:
+* Then open `localhost:10017` to access Odoo 17.0. If you want to start the server with a different port, change **10017** to another value in **docker-compose.yml**:
 
 ```
 ports:
- - "10016:8069"
+ - "10017:8069"
 ```
 
 Run Odoo container in detached mode (be able to close terminal without stopping Odoo):
@@ -112,7 +112,7 @@ Configuring **nginx** to activate live chat feature (in production):
 server {
     #...
     location /longpolling/ {
-        proxy_pass http://0.0.0.0:20016/longpolling/;
+        proxy_pass http://0.0.0.0:20017/longpolling/;
     }
     #...
 }
