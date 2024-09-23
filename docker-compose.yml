@@ -24,7 +24,7 @@ services:
     environment:
       - HOST=db
       - USER=odoo
-      - PASSWORD=odoo17!@E#rOot
+      - PASSWORD=odoo17@!SsS
     volumes:
       #- /etc/timezone:/etc/timezone:trt
       #- /etc/localtime:/etc/localtime:trt
