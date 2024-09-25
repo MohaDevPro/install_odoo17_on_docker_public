@@ -8,7 +8,12 @@ Install [docker](https://docs.docker.com/get-docker/) and [docker-compose](https
 
 
 ``` bash
-curl -s https://raw.githubusercontent.com/MohaDevPro/install_odoo17_on_docker_public/master/run.sh | sudo bash -s odoo17-one 10017 20017
+curl -s https://raw.githubusercontent.com/MohaDevPro/install_odoo17_on_docker_public/master/run.sh | sudo bash -s odoo17-one 10017 20017  # Uses default version 17
+```
+Or specify a different version:
+
+``` bash
+curl -s https://raw.githubusercontent.com/MohaDevPro/install_odoo17_on_docker_public/master/run.sh | sudo bash -s odoo17-one 10017 20017 16.0
 ```
 
 to set up first Odoo instance @ `localhost:10015` (default master password: `admin@1234`)
