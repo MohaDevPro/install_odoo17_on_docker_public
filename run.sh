@@ -26,8 +26,9 @@ sed -i "s/10015/$PORT/g" $DESTINATION/docker-compose.yml
 sed -i "s/20015/$CHAT/g" $DESTINATION/docker-compose.yml
 sed -i "s/5053/$PGADMIN/g" $DESTINATION/docker-compose.yml
 
-# Update Odoo version
+# Update Odoo version in image and replace 'odoo17' with 'odoo' + the provided version
 sed -i "s|odoo:[0-9]\+|odoo:$ODOO_VERSION|g" $DESTINATION/docker-compose.yml
+sed -i "s|odoo17|odoo$ODOO_VERSION|g" $DESTINATION/docker-compose.yml
 
 # Run Odoo
 docker compose -f $DESTINATION/docker-compose.yml up -d
