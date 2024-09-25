@@ -21,15 +21,15 @@ else
 fi
 sudo sysctl -p
 
-# Update ports and Odoo version in docker-compose.yml
-sed -i 's/10015/'$PORT'/g' $DESTINATION/docker-compose.yml
-sed -i 's/20015/'$CHAT'/g' $DESTINATION/docker-compose.yml
-sed -i 's/5053/'$PGADMIN'/g' $DESTINATION/docker-compose.yml
+# Update ports in docker-compose.yml
+sed -i "s/10015/$PORT/g" $DESTINATION/docker-compose.yml
+sed -i "s/20015/$CHAT/g" $DESTINATION/docker-compose.yml
+sed -i "s/5053/$PGADMIN/g" $DESTINATION/docker-compose.yml
 
 # Update Odoo version
-sed -i 's/odoo:[0-9]\+/'odoo:'$ODOO_VERSION'/g' $DESTINATION/docker-compose.yml
+sed -i "s|odoo:[0-9]\+|odoo:$ODOO_VERSION|g" $DESTINATION/docker-compose.yml
 
 # Run Odoo
 docker compose -f $DESTINATION/docker-compose.yml up -d
 
-echo 'Started Odoo @ http://localhost:'$PORT' | Master Password: admin@1234 | Live chat port: '$CHAT
+echo "Started Odoo @ http://localhost:$PORT | Master Password: admin@1234 | Live chat port: $CHAT"
