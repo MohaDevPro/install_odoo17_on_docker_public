@@ -14,7 +14,7 @@ def get_requirements():
     return requirements
 
 def install_missing_packages(requirements, installed):
-    print(f"install_missing_packages: {', '.join(missing_packages)} \n")
+    print(f"install_missing_packages: \n")
     # Install missing packages
     missing_packages = requirements - installed
     if missing_packages:
