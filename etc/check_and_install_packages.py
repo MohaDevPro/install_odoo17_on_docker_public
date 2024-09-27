@@ -14,14 +14,19 @@ def get_requirements():
     return requirements
 
 def install_missing_packages(requirements, installed):
-    print(f"install_missing_packages: \n")
+    print("install_missing_packages: \n")
     # Install missing packages
     missing_packages = requirements - installed
     if missing_packages:
-        print(f"Installing missing packages: {', '.join(missing_packages)}")
-        subprocess.run(['pip3', 'install'] + list(missing_packages))
+        for package in missing_packages:
+            print(f"Attempting to install package: {package}")
+            try:
+                subprocess.run(['pip3', 'install', package], check=True)
+                print(f"Successfully installed package: {package}")
+            except subprocess.CalledProcessError:
+                print(f"Failed to install package: {package}, skipping.")
     else:
-        print(f"No missing packages")
+        print("No missing packages")
 
 
 if __name__ == "__main__":
