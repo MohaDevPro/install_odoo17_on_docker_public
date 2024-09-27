@@ -30,13 +30,13 @@ sed -i "s/5053/$PGADMIN/g" "$DESTINATION/docker-compose.yml"
 sed -i "s|odoo:[0-9]\+|odoo:$ODOO_VERSION|g" "$DESTINATION/docker-compose.yml"
 sed -i "s|odoo17|odoo$ODOO_VERSION|g" "$DESTINATION/docker-compose.yml"
 
-# # Update the Dockerfile for the Odoo version
-# DOCKERFILE="$DESTINATION/Dockerfile"
-# if [[ -f $DOCKERFILE ]]; then
-#     sed -i "s|FROM odoo:[0-9]\+|FROM odoo:$ODOO_VERSION|g" "$DOCKERFILE"
-# else
-#     echo "Dockerfile not found at $DOCKERFILE"
-# fi
+# Update the Dockerfile for the Odoo version
+DOCKERFILE="$DESTINATION/Dockerfile"
+if [[ -f $DOCKERFILE ]]; then
+    sed -i "s|FROM odoo:[0-9]\+|FROM odoo:$ODOO_VERSION|g" "$DOCKERFILE"
+else
+    echo "Dockerfile not found at $DOCKERFILE"
+fi
 
 
 # Run Odoo
