@@ -32,6 +32,9 @@ services:
       - ./addons:/mnt/extra-addons
       - ./etc:/etc/odoo
     restart: always             # run as a service
+    networks:
+      my-main-net: {}
+      default: {}
 
   pgadmin:
     image: fenglc/pgadmin4
@@ -49,3 +52,6 @@ services:
     volumes:
       - ./pgadmin-data:/var/lib/pgadmin
       #- /var/run/docker.sock:/tmp/docker.sock
+networks:
+  my-main-net:
+    external: true
