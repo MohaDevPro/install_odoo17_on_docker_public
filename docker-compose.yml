@@ -1,16 +1,16 @@
   version: '3.4'
   services:
-    db:
-      image: postgres:14.13
-      user: root
-      container_name: shared-postgres-db
-      environment:
-        - POSTGRES_USER=odoo
-        - POSTGRES_PASSWORD=odoo17ss
-        - POSTGRES_DB=postgres
-      restart: always             # run as a service
-      volumes:
-        - /opt/odoo/shared-postgres-db/data:/var/lib/postgresql/data
+    # db:
+    #   image: postgres:14.13
+    #   user: root
+    #   container_name: shared-postgres-db
+    #   environment:
+    #     - POSTGRES_USER=odoo
+    #     - POSTGRES_PASSWORD=odoo17ss
+    #     - POSTGRES_DB=postgres
+    #   restart: always             # run as a service
+    #   volumes:
+    #     - /opt//shared-postgres-db/data:/var/lib/postgresql/data
       # networks:
       #   my-main-net:
       #     ipv4_address: 192.168.0.10  # Static IP for PostgreSQL
@@ -39,22 +39,22 @@
       #   my-main-net:
       #     ipv4_address: 192.168.0.20  # Static IP for odoo17
 
-    pgadmin:
-      image: dpage/pgadmin4
-      container_name: shared-pgadmin-db
-      ports:
-        - 5053:5050
-      restart: always
-      links:
-        - db:db
-      environment:
-        DEFAULT_USER: admin
-        DEFAULT_PASSWORD: YbrS9eP4!j
-      # VIRTUAL_HOST: 
-      # LETSENCRYPT_HOST:
-      # VIRTUAL_PORT: 5050
-      volumes:
-        - ./pgadmin-data:/var/lib/pgadmin
+    # pgadmin:
+    #   image: dpage/pgadmin4
+    #   container_name: shared-pgadmin-db
+    #   ports:
+    #     - 5053:5050
+    #   restart: always
+    #   links:
+    #     - db:db
+    #   environment:
+    #     DEFAULT_USER: admin
+    #     DEFAULT_PASSWORD: YbrS9eP4!j
+    #   # VIRTUAL_HOST: 
+    #   # LETSENCRYPT_HOST:
+    #   # VIRTUAL_PORT: 5050
+    #   volumes:
+    #     - ./pgadmin-data:/var/lib/pgadmin
         #- /var/run/docker.sock:/tmp/docker.sock
       # networks:
       #   my-main-net:
