@@ -17,8 +17,8 @@
     odoo17:
       build: .
       # user: root
-      depends_on:
-        - db
+      # depends_on:
+      #   - db
       ports:
         - "10015:8069"
         - "20015:8072" # live chat
