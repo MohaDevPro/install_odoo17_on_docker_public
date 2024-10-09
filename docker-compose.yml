@@ -1,57 +1,67 @@
-version: '3.4'
-services:
-  db:
-    image: postgres:14.13
-    user: root
-    environment:
-      - POSTGRES_USER=odoo
-      - POSTGRES_PASSWORD=odoo17ss
-      - POSTGRES_DB=postgres
-    restart: always             # run as a service
-    volumes:
-        - ./postgresql:/var/lib/postgresql/data
+  version: '3.4'
+  services:
+    db:
+      image: postgres:14.13
+      user: root
+      container_name: shared-postgres-db
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: odoo17ss
+        POSTGRES_DB: postgres
+      restart: always             # run as a service
+      volumes:
+        - /opt/odoo/shared-postgres-db/data:/var/lib/postgresql/data
+      # networks:
+      #   my-main-net:
+      #     ipv4_address: 192.168.0.10  # Static IP for PostgreSQL
+    odoo17:
+      build: .
+      # user: root
+      depends_on:
+        - db
+      ports:
+        - "10015:8069"
+        - "20015:8072" # live chat
+      tty: true
+      command: --
+      environment:
+        - HOST=db
+        - USER=odoo
+        - PASSWORD=odoo17ss
+      volumes:
+        #- /etc/timezone:/etc/timezone:trt
+        #- /etc/localtime:/etc/localtime:trt
+        - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
+        - ./addons:/mnt/extra-addons
+        - ./etc:/etc/odoo
+      restart: always             # run as a service
+      # networks:
+      #   my-main-net:
+      #     ipv4_address: 192.168.0.20  # Static IP for odoo17
 
-  odoo17:
-    build: .
-    user: root
-    depends_on:
-      - db
-    ports:
-      - "10015:8069"
-      - "20015:8072" # live chat
-    tty: true
-    command: --
-    environment:
-      - HOST=db
-      - USER=odoo
-      - PASSWORD=odoo17ss
-    volumes:
-      #- /etc/timezone:/etc/timezone:trt
-      #- /etc/localtime:/etc/localtime:trt
-      - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
-      - ./addons:/mnt/extra-addons
-      - ./etc:/etc/odoo
-    restart: always             # run as a service
-    networks:
-      my-main-net: {}
-      default: {}
-
-  pgadmin:
-    image: fenglc/pgadmin4
-    ports:
-      - 5053:5050
-    restart: always
-    links:
-      - db:db
-    environment:
-      DEFAULT_USER: admin
-      DEFAULT_PASSWORD: YbrS9eP4!j
-     # VIRTUAL_HOST: 
-     # LETSENCRYPT_HOST:
-     # VIRTUAL_PORT: 5050
-    volumes:
-      - ./pgadmin-data:/var/lib/pgadmin
-      #- /var/run/docker.sock:/tmp/docker.sock
-networks:
-  my-main-net:
-    external: true
+    pgadmin:
+      image: dpage/pgadmin4
+      container_name: shared-pgadmin-db
+      ports:
+        - 5053:5050
+      restart: always
+      links:
+        - db:db
+      environment:
+        DEFAULT_USER: admin
+        DEFAULT_PASSWORD: YbrS9eP4!j
+      # VIRTUAL_HOST: 
+      # LETSENCRYPT_HOST:
+      # VIRTUAL_PORT: 5050
+      volumes:
+        - ./pgadmin-data:/var/lib/pgadmin
+        #- /var/run/docker.sock:/tmp/docker.sock
+      # networks:
+      #   my-main-net:
+      #     ipv4_address: 192.168.0.12  # Static IP for odoo17
+  # networks:
+  #   my-main-net:
+  #     external: true
+  #     ipam:
+  #       config:
+  #         - subnet: 192.168.0.0/22  # This allows for 1022 usable IP addresses
