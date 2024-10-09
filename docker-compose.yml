@@ -5,7 +5,7 @@
       user: root
       container_name: shared-postgres-db
       environment:
-        POSTGRES_USER: postgres
+        POSTGRES_USER: odoo
         POSTGRES_PASSWORD: odoo17ss
         POSTGRES_DB: postgres
       restart: always             # run as a service
