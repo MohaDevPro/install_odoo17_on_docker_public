@@ -13,7 +13,7 @@ services:
       - /opt/odoo/shared-postgres-db/data:/var/lib/postgresql/data
     networks:
       odoo-network:
-        ipv4_address: 172.25.0.1  # Static IP for PostgreSQL
+        ipv4_address: 172.25.0.2  # Static IP for PostgreSQL
   odoo_name:
     image: odoo:17.0
     # user: root
@@ -37,7 +37,7 @@ services:
     restart: always             # run as a service
     networks:
       odoo-network:
-        ipv4_address: 172.25.0.2  # Static IP for odoo17
+        ipv4_address: 172.25.0.3  # Static IP for odoo17
 
   # pgadmin:
   #   image: dpage/pgadmin4
