@@ -12,8 +12,8 @@ services:
       - ./postgresql:/var/lib/postgresql/data
     networks:
       odoo_name:
-      odoo-network:
-        ipv4_address: 172.25.0.2  # Static IP for PostgreSQL
+      # odoo-network:
+      #   ipv4_address: 172.25.0.2  # Static IP for PostgreSQL
   odoo_name:
     image: odoo:17.0
     # user: root
