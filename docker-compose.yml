@@ -3,14 +3,13 @@ services:
   db:
     image: postgres:14.13
     user: root
-    container_name: shared-postgres-db
     environment:
       - POSTGRES_USER=odoo
       - POSTGRES_PASSWORD=odoo17ss
       - POSTGRES_DB=postgres
     restart: always             # run as a service
     volumes:
-      - /opt/odoo/shared-postgres-db/data:/var/lib/postgresql/data
+      - ./postgresql:/var/lib/postgresql/data
     networks:
       odoo-network:
         ipv4_address: 172.25.0.2  # Static IP for PostgreSQL
