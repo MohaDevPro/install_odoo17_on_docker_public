@@ -8,9 +8,10 @@ set -e
 : ${PORT:=${DB_PORT_5432_TCP_PORT:=5432}}
 : ${USER:=${DB_ENV_POSTGRES_USER:=${POSTGRES_USER:='odoo'}}}
 : ${PASSWORD:=${DB_ENV_POSTGRES_PASSWORD:=${POSTGRES_PASSWORD:='odoo17ss'}}}
-
+sudo apt-get update -y
+sudo apt-get upgrade -y
 # install python packages
-# pip3 install pip --upgrade
+pip3 install pip --upgrade
 
 pip3 install -r /etc/odoo/requirements.txt
 # Run the Python script to check and install missing packages
