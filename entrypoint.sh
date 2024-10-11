@@ -12,7 +12,7 @@ set -e
 # install python packages
 # pip3 install pip --upgrade
 
-# pip3 install -r /etc/odoo/requirements.txt
+pip3 install -r /etc/odoo/requirements.txt
 # Run the Python script to check and install missing packages
 # python3 /etc/odoo/check_and_install_packages.py
 
