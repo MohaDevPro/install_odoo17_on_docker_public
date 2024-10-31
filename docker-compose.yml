@@ -1,31 +1,15 @@
-version: '3.4'
+---
 services:
-  db:
-    image: postgres:14.13
-    user: root
-    environment:
-      - POSTGRES_USER=odoo
-      - POSTGRES_PASSWORD=odoo17ss
-      - POSTGRES_DB=postgres
-    restart: always             # run as a service
-    volumes:
-      - ./postgresql:/var/lib/postgresql/data
-    networks:
-      odoo_name:
-      # odoo-network:
-      #   ipv4_address: 172.25.0.2  # Static IP for PostgreSQL
   odoo_name:
-    image: myodoo17
+    image: myodoo17:1.0
     # user: root
-    depends_on:
-      - db
     ports:
       - "10015:8069"
       - "20015:8072" # live chat
     tty: true
     command: --
     environment:
-      - HOST=db
+      - HOST=hostdb
       - USER=odoo
       - PASSWORD=odoo17ss
     volumes:
@@ -38,33 +22,9 @@ services:
     networks:
       odoo_name:
       odoo-network:
-        ipv4_address: 172.25.0.3  # Static IP for odoo17
-
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   container_name: shared-pgadmin-db
-  #   ports:
-  #     - 5053:5050
-  #   restart: always
-  #   links:
-  #     - db:db
-  #   environment:
-  #     DEFAULT_USER: admin
-  #     DEFAULT_PASSWORD: YbrS9eP4!j
-  #   # VIRTUAL_HOST: 
-  #   # LETSENCRYPT_HOST:
-  #   # VIRTUAL_PORT: 5050
-  #   volumes:
-  #     - ./pgadmin-data:/var/lib/pgadmin
-  #     #- /var/run/docker.sock:/tmp/docker.sock
-  #   networks:
-  #     odoo-network:
-  #       ipv4_address: 172.25.0.12  # Static IP for odoo17
+        # ipv4_address: 172.25.0.3  # Static IP for odoo17
 networks:
   odoo_name:
     driver: bridge  # Internal network
   odoo-network:
     external: true
-    # ipam:
-    #   config:
-    #     - subnet: 172.25.0.0/16  # This allows for 1022 usable IP addresses

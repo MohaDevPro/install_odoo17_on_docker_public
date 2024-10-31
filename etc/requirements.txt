@@ -2,3 +2,5 @@ pandas
 xlrd
 openpyxl
 mysql-connector
+phonenumbers
+dropbox
